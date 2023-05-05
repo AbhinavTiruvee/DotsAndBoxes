@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class GameData
 {
     public Line line1 = new Line(0,0, 1, 0);
@@ -70,9 +72,11 @@ public class GameData
     public Line line58 = new Line(2,5,3,5);
     public Line line59 = new Line(3,5,4,5);
     public Line line60 = new Line(4,5,5,5);
+    public ArrayList<Line> lines = new ArrayList<>();
 
     //keep going
-    public Box box1, box2, box3, box4, box5, box6, box7, box8;
+    public char[][] boxes;
+
 
     public int redScore;
     public int blueScore;
@@ -81,10 +85,313 @@ public class GameData
     {
         redScore = 0;
         blueScore = 0;
+        boxes = new char[5][5];
+        for(int i = 0; i< boxes.length; i++)
+        {
+            for(int j = 0; j< boxes[0].length; j++)
+            {
+                boxes[i][j] = ' ';
+            }
+        }
+        //add all lines to line
+        lines.add(line1);
     }
 
-    public void setScores()
+    public char[][] getBoxes()
+    {
+        return boxes;
+    }
+
+    public void reset()
     {
 
+        boxes = new char[5][5];
+        for(int r=0;r<boxes.length; r++)
+            for(int c=0; c<boxes[0].length; c++)
+                boxes[r][c]=' ';
+    }
+
+    public boolean isWinner(char player)
+    {
+        int numBoxesPlayerColor = 0;
+
+        //if theres an empty box, return false
+        //if all the boxes are full, see if the player has the most boxes
+        for(int i = 0; i<boxes.length; i++)
+        {
+            for(int j = 0; j<boxes[0].length; j++)
+            {
+                if(boxes[i][j] == ' ')
+                {
+                    return false;
+                }
+                else if(boxes[i][j] == player)
+                {
+                    numBoxesPlayerColor++;
+                }
+            }
+        }
+
+        return numBoxesPlayerColor >= 13;
+
+    }
+
+    public void setBoxes()
+    {
+        //box 0,0
+        if(line1.getStatus() == Line.RED && line6.getStatus() == Line.RED && line7.getStatus() == Line.RED && line12.getStatus() == Line.RED)
+        {
+            boxes[0][0] = 'R';
+        }
+        else if(line1.getStatus() == Line.BLUE && line6.getStatus() == Line.BLUE && line7.getStatus() == Line.BLUE && line12.getStatus() == Line.BLUE)
+        {
+            boxes[0][0] = 'B';
+        }
+
+        //box 0,1
+        if(line2.getStatus() == Line.RED && line7.getStatus() == Line.RED && line8.getStatus() == Line.RED && line13.getStatus() == Line.RED)
+        {
+            boxes[0][1] = 'R';
+        }
+        else if(line2.getStatus() == Line.BLUE && line7.getStatus() == Line.BLUE && line8.getStatus() == Line.BLUE && line13.getStatus() == Line.BLUE)
+        {
+            boxes[0][1] = 'B';
+        }
+
+        //box 0,2
+        if(line3.getStatus() == Line.RED && line8.getStatus() == Line.RED && line9.getStatus() == Line.RED && line14.getStatus() == Line.RED)
+        {
+            boxes[0][2] = 'R';
+        }
+        else if(line3.getStatus() == Line.BLUE && line8.getStatus() == Line.BLUE && line9.getStatus() == Line.BLUE && line14.getStatus() == Line.BLUE)
+        {
+            boxes[0][2] = 'B';
+        }
+
+        //box 0,3
+        if(line4.getStatus() == Line.RED && line9.getStatus() == Line.RED && line10.getStatus() == Line.RED && line15.getStatus() == Line.RED)
+        {
+            boxes[0][3] = 'R';
+        }
+        else if(line4.getStatus() == Line.BLUE && line9.getStatus() == Line.BLUE && line10.getStatus() == Line.BLUE && line15.getStatus() == Line.BLUE)
+        {
+            boxes[0][3] = 'B';
+        }
+
+        //box 0,4
+        if(line5.getStatus() == Line.RED && line10.getStatus() == Line.RED && line11.getStatus() == Line.RED && line16.getStatus() == Line.RED)
+        {
+            boxes[0][4] = 'R';
+        }
+        else if(line5.getStatus() == Line.BLUE && line10.getStatus() == Line.BLUE && line11.getStatus() == Line.BLUE && line16.getStatus() == Line.BLUE)
+        {
+            boxes[0][4] = 'B';
+        }
+
+        //box 1,0
+        if(line12.getStatus() == Line.RED && line17.getStatus() == Line.RED && line18.getStatus() == Line.RED && line23.getStatus() == Line.RED)
+        {
+            boxes[1][0] = 'R';
+        }
+        else if(line12.getStatus() == Line.BLUE && line17.getStatus() == Line.BLUE && line18.getStatus() == Line.BLUE && line23.getStatus() == Line.BLUE)
+        {
+            boxes[1][0] = 'B';
+        }
+
+        //box 1,1
+        if(line13.getStatus() == Line.RED && line18.getStatus() == Line.RED && line19.getStatus() == Line.RED && line24.getStatus() == Line.RED)
+        {
+            boxes[1][1] = 'R';
+        }
+        else if(line13.getStatus() == Line.BLUE && line18.getStatus() == Line.BLUE && line19.getStatus() == Line.BLUE && line24.getStatus() == Line.BLUE)
+        {
+            boxes[1][1] = 'B';
+        }
+
+        //box 1,2
+        if(line14.getStatus() == Line.RED && line19.getStatus() == Line.RED && line20.getStatus() == Line.RED && line25.getStatus() == Line.RED)
+        {
+            boxes[1][2] = 'R';
+        }
+        else if(line14.getStatus() == Line.BLUE && line19.getStatus() == Line.BLUE && line20.getStatus() == Line.BLUE && line25.getStatus() == Line.BLUE)
+        {
+            boxes[1][2] = 'B';
+        }
+
+        //box 1,3
+        if(line15.getStatus() == Line.RED && line20.getStatus() == Line.RED && line21.getStatus() == Line.RED && line26.getStatus() == Line.RED)
+        {
+            boxes[1][3] = 'R';
+        }
+        else if(line15.getStatus() == Line.BLUE && line20.getStatus() == Line.BLUE && line21.getStatus() == Line.BLUE && line26.getStatus() == Line.BLUE)
+        {
+            boxes[1][3] = 'B';
+        }
+
+        //box 1,4
+        if(line16.getStatus() == Line.RED && line21.getStatus() == Line.RED && line22.getStatus() == Line.RED && line27.getStatus() == Line.RED)
+        {
+            boxes[1][4] = 'R';
+        }
+        else if(line16.getStatus() == Line.BLUE && line21.getStatus() == Line.BLUE && line22.getStatus() == Line.BLUE && line27.getStatus() == Line.BLUE)
+        {
+            boxes[1][4] = 'B';
+        }
+
+        //box 2,0
+        if(line23.getStatus() == Line.RED && line28.getStatus() == Line.RED && line29.getStatus() == Line.RED && line34.getStatus() == Line.RED)
+        {
+            boxes[2][0] = 'R';
+        }
+        else if(line23.getStatus() == Line.BLUE && line28.getStatus() == Line.BLUE && line29.getStatus() == Line.BLUE && line34.getStatus() == Line.BLUE)
+        {
+            boxes[2][0] = 'B';
+        }
+
+        //box 2,1
+        if(line24.getStatus() == Line.RED && line29.getStatus() == Line.RED && line30.getStatus() == Line.RED && line35.getStatus() == Line.RED)
+        {
+            boxes[2][1] = 'R';
+        }
+        else if(line24.getStatus() == Line.BLUE && line29.getStatus() == Line.BLUE && line30.getStatus() == Line.BLUE && line35.getStatus() == Line.BLUE)
+        {
+            boxes[2][1] = 'B';
+        }
+
+        //box 2,2
+        if(line25.getStatus() == Line.RED && line30.getStatus() == Line.RED && line31.getStatus() == Line.RED && line36.getStatus() == Line.RED)
+        {
+            boxes[2][2] = 'R';
+        }
+        else if(line25.getStatus() == Line.BLUE && line30.getStatus() == Line.BLUE && line31.getStatus() == Line.BLUE && line36.getStatus() == Line.BLUE)
+        {
+            boxes[2][2] = 'B';
+        }
+
+        //box 2,3
+        if(line26.getStatus() == Line.RED && line31.getStatus() == Line.RED && line32.getStatus() == Line.RED && line37.getStatus() == Line.RED)
+        {
+            boxes[2][3] = 'R';
+        }
+        else if(line26.getStatus() == Line.BLUE && line31.getStatus() == Line.BLUE && line32.getStatus() == Line.BLUE && line37.getStatus() == Line.BLUE)
+        {
+            boxes[2][3] = 'B';
+        }
+
+        //box 2,4
+        if(line27.getStatus() == Line.RED && line32.getStatus() == Line.RED && line33.getStatus() == Line.RED && line38.getStatus() == Line.RED)
+        {
+            boxes[2][4] = 'R';
+        }
+        else if(line27.getStatus() == Line.BLUE && line32.getStatus() == Line.BLUE && line33.getStatus() == Line.BLUE && line38.getStatus() == Line.BLUE)
+        {
+            boxes[2][4] = 'B';
+        }
+
+        //box 3,0
+
+        if(line34.getStatus() == Line.RED && line39.getStatus() == Line.RED && line40.getStatus() == Line.RED && line45.getStatus() == Line.RED)
+        {
+            boxes[3][0] = 'R';
+        }
+        else if(line34.getStatus() == Line.BLUE && line39.getStatus() == Line.BLUE && line40.getStatus() == Line.BLUE && line45.getStatus() == Line.BLUE)
+        {
+            boxes[3][0] = 'B';
+        }
+
+        //box 3,1
+
+        if(line35.getStatus() == Line.RED && line40.getStatus() == Line.RED && line41.getStatus() == Line.RED && line46.getStatus() == Line.RED)
+        {
+            boxes[3][1] = 'R';
+        }
+        else if(line35.getStatus() == Line.BLUE && line40.getStatus() == Line.BLUE && line41.getStatus() == Line.BLUE && line46.getStatus() == Line.BLUE)
+        {
+            boxes[3][1] = 'B';
+        }
+
+        //box 3,2
+
+        if(line36.getStatus() == Line.RED && line41.getStatus() == Line.RED && line42.getStatus() == Line.RED && line47.getStatus() == Line.RED)
+        {
+            boxes[3][2] = 'R';
+        }
+        else if(line36.getStatus() == Line.BLUE && line41.getStatus() == Line.BLUE && line42.getStatus() == Line.BLUE && line47.getStatus() == Line.BLUE)
+        {
+            boxes[3][2] = 'B';
+        }
+
+        //box 3,3
+
+        if(line37.getStatus() == Line.RED && line42.getStatus() == Line.RED && line43.getStatus() == Line.RED && line48.getStatus() == Line.RED)
+        {
+            boxes[3][3] = 'R';
+        }
+        else if(line37.getStatus() == Line.BLUE && line42.getStatus() == Line.BLUE && line43.getStatus() == Line.BLUE && line48.getStatus() == Line.BLUE)
+        {
+            boxes[3][3] = 'B';
+        }
+
+        //box 3,4
+
+        if(line38.getStatus() == Line.RED && line43.getStatus() == Line.RED && line44.getStatus() == Line.RED && line49.getStatus() == Line.RED)
+        {
+            boxes[3][4] = 'R';
+        }
+        else if(line38.getStatus() == Line.BLUE && line43.getStatus() == Line.BLUE && line44.getStatus() == Line.BLUE && line49.getStatus() == Line.BLUE)
+        {
+            boxes[3][4] = 'B';
+        }
+
+        //box 4,0
+        if(line45.getStatus() == Line.RED && line50.getStatus() == Line.RED && line51.getStatus() == Line.RED && line56.getStatus() == Line.RED)
+        {
+            boxes[4][0] = 'R';
+        }
+        else if(line45.getStatus() == Line.BLUE && line50.getStatus() == Line.BLUE && line51.getStatus() == Line.BLUE && line56.getStatus() == Line.BLUE)
+        {
+            boxes[4][0] = 'B';
+        }
+
+        //box 4,1
+
+        if(line46.getStatus() == Line.RED && line51.getStatus() == Line.RED && line52.getStatus() == Line.RED && line57.getStatus() == Line.RED)
+        {
+            boxes[4][1] = 'R';
+        }
+        else if(line46.getStatus() == Line.BLUE && line51.getStatus() == Line.BLUE && line52.getStatus() == Line.BLUE && line57.getStatus() == Line.BLUE)
+        {
+            boxes[4][1] = 'B';
+        }
+
+        //box 4,2
+        if(line47.getStatus() == Line.RED && line52.getStatus() == Line.RED && line53.getStatus() == Line.RED && line58.getStatus() == Line.RED)
+        {
+            boxes[4][2] = 'R';
+        }
+        else if(line47.getStatus() == Line.BLUE && line52.getStatus() == Line.BLUE && line53.getStatus() == Line.BLUE && line58.getStatus() == Line.BLUE)
+        {
+            boxes[4][2] = 'B';
+        }
+
+        //box 4,3
+        if(line48.getStatus() == Line.RED && line53.getStatus() == Line.RED && line54.getStatus() == Line.RED && line59.getStatus() == Line.RED)
+        {
+            boxes[4][3] = 'R';
+        }
+        else if(line48.getStatus() == Line.BLUE && line53.getStatus() == Line.BLUE && line54.getStatus() == Line.BLUE && line59.getStatus() == Line.BLUE)
+        {
+            boxes[4][3] = 'B';
+        }
+
+        //box 4,4
+        if(line49.getStatus() == Line.RED && line54.getStatus() == Line.RED && line55.getStatus() == Line.RED && line60.getStatus() == Line.RED)
+        {
+            boxes[4][4] = 'R';
+        }
+        else if(line49.getStatus() == Line.BLUE && line54.getStatus() == Line.BLUE && line55.getStatus() == Line.BLUE && line60.getStatus() == Line.BLUE)
+        {
+            boxes[4][4] = 'B';
+        }
     }
 }
