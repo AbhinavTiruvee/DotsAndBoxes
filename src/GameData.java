@@ -95,12 +95,76 @@ public class GameData
         }
         //add all lines to line
         lines.add(line1);
+        lines.add(line2);
+        lines.add(line3);
+        lines.add(line4);
+        lines.add(line5);
+        lines.add(line6);
+        lines.add(line7);
+        lines.add(line8);
+        lines.add(line9);
+        lines.add(line10);
+        lines.add(line11);
+        lines.add(line12);
+        lines.add(line13);
+        lines.add(line14);
+        lines.add(line15);
+        lines.add(line16);
+        lines.add(line17);
+        lines.add(line18);
+        lines.add(line19);
+        lines.add(line20);
+        lines.add(line21);
+        lines.add(line22);
+        lines.add(line23);
+        lines.add(line24);
+        lines.add(line25);
+        lines.add(line26);
+        lines.add(line27);
+        lines.add(line28);
+        lines.add(line29);
+        lines.add(line30);
+        lines.add(line31);
+        lines.add(line32);
+        lines.add(line33);
+        lines.add(line34);
+        lines.add(line35);
+        lines.add(line36);
+        lines.add(line37);
+        lines.add(line38);
+        lines.add(line39);
+        lines.add(line40);
+        lines.add(line41);
+        lines.add(line42);
+        lines.add(line43);
+        lines.add(line44);
+        lines.add(line45);
+        lines.add(line46);
+        lines.add(line47);
+        lines.add(line48);
+        lines.add(line49);
+        lines.add(line50);
+        lines.add(line51);
+        lines.add(line52);
+        lines.add(line53);
+        lines.add(line54);
+        lines.add(line55);
+        lines.add(line56);
+        lines.add(line57);
+        lines.add(line58);
+        lines.add(line59);
+        lines.add(line60);
     }
 
     public char[][] getBoxes()
     {
         return boxes;
     }
+    public ArrayList<Line> getLines()
+    {
+        return lines;
+    }
+
 
     public void reset()
     {

@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 public class DotsAndBoxesFrame extends JFrame implements MouseListener
 {
@@ -57,7 +58,7 @@ public class DotsAndBoxesFrame extends JFrame implements MouseListener
             {
                 if(gameData.getBoxes()[i][j] == ' ')
                 {
-                    g.setColor(Color.GRAY);
+                    g.setColor(new Color(210, 210, 210));
                 }
                 else if(gameData.getBoxes()[i][j] == 'R')
                 {
@@ -71,9 +72,36 @@ public class DotsAndBoxesFrame extends JFrame implements MouseListener
                 {
                     g.setColor(Color.PINK);
                 }
-                g.drawRect(j*50+50, i*50+50, 100, 100);
-                g.fillRect(j*50+50, i*50+50, 100, 100);
+                g.drawRect(j*100+50, i*100+50, 100, 100);
+                g.fillRect(j*100+50, i*100+50, 100, 100);
             }
+        }
+
+        //draw lines
+
+        ArrayList<Line> lines = gameData.getLines();
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(10));
+        for(int i = 0; i<lines.size();i++)
+        {
+            if(lines.get(i).getStatus() == Line.GRAY)
+            {
+                g2.setColor(Color.DARK_GRAY);
+
+            }
+            else if(lines.get(i).getStatus() == Line.BLUE)
+            {
+                g2.setColor(Color.BLUE);
+            }
+            else if(lines.get(i).getStatus() == Line.RED)
+            {
+                g2.setColor(Color.RED);
+            }
+            else
+            {
+                g2.setColor(Color.PINK);
+            }
+            g2.drawLine(lines.get(i).getX1()*100+50, lines.get(i).getY1()*100+50, lines.get(i).getX2()*100+50, lines.get(i).getY2()*100+50);
         }
 
         //dots
@@ -82,12 +110,11 @@ public class DotsAndBoxesFrame extends JFrame implements MouseListener
         {
             for(int j = 0; j<6;j++)
             {
-                g.drawOval(j*50+50, i*50+50, 20, 20);
-                g.fillOval(j*50+50, i*50+50, 20, 20);
+                g.drawOval(j*100+40, i*100+40, 20, 20);
+                g.fillOval(j*100+40, i*100+40, 20, 20);
             }
         }
 
-        //draw lines
 
     }
 
@@ -105,6 +132,11 @@ public class DotsAndBoxesFrame extends JFrame implements MouseListener
             text = turn+"'s turn.";
         }
         repaint();
+    }
+
+    public void makeMove()
+    {
+
     }
     @Override
     public void mouseClicked(MouseEvent e) {
