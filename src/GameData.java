@@ -161,6 +161,10 @@ public class GameData
         for(int r=0;r<boxes.length; r++)
             for(int c=0; c<boxes[0].length; c++)
                 boxes[r][c]=' ';
+        for(int i = 0; i<getLines().size();i++)
+        {
+            getLines().get(i).setStatus(Line.GRAY);
+        }
     }
 
     public boolean isWinner(char player)

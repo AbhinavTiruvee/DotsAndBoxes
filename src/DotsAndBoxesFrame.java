@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -29,9 +30,12 @@ public class DotsAndBoxesFrame extends JFrame implements MouseListener, KeyListe
         gameData.addLines();
 
         addMouseListener(this);
+        addKeyListener(this);
 
         // makes closing the frame close the program
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+
 
         // Set initial frame message
         if(player == 'R')
@@ -45,20 +49,22 @@ public class DotsAndBoxesFrame extends JFrame implements MouseListener, KeyListe
 
     public void paint(Graphics g)
     {
+        BufferedImage buffer = new BufferedImage(900, 900, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D bufferG = buffer.createGraphics();
         // draws the background
-        g.setColor(new Color(0, 126, 182));
-        g.fillRect(0,0,getWidth(),getHeight());
+        bufferG.setColor(new Color(0, 126, 182));
+        bufferG.fillRect(0,0,getWidth(),getHeight());
 
         // draws the display text to the screen
-        g.setColor(Color.BLACK);
-        g.setFont(new Font("Times New Roman",Font.BOLD,30));
-        g.drawString(text,20,55);
+        bufferG.setColor(Color.BLACK);
+        bufferG.setFont(new Font("Times New Roman",Font.BOLD,30));
+        bufferG.drawString(text,20,55);
 
         //draw scores to screen
         redScore = gameData.score('R');
         blueScore = gameData.score('B');
 
-        g.drawString("Red: "+redScore+" Blue:"+blueScore, 500,55);
+        bufferG.drawString("Red: "+redScore+" Blue:"+blueScore, 500,55);
 
         //boxes
         for(int i = 0; i < gameData.getBoxes().length; i++)
@@ -67,61 +73,63 @@ public class DotsAndBoxesFrame extends JFrame implements MouseListener, KeyListe
             {
                 if(gameData.getBoxes()[i][j] == ' ')
                 {
-                    g.setColor(new Color(210, 210, 210));
+                    bufferG.setColor(new Color(210, 210, 210));
                 }
                 else if(gameData.getBoxes()[i][j] == 'R')
                 {
-                    g.setColor(new Color(255, 87, 87));
+                    bufferG.setColor(new Color(255, 87, 87));
                 }
                 else if(gameData.getBoxes()[i][j] == 'B')
                 {
-                    g.setColor(new Color(84, 99, 255));
+                    bufferG.setColor(new Color(84, 99, 255));
                 }
                 else
                 {
-                    g.setColor(Color.PINK);
+                    bufferG.setColor(Color.PINK);
                 }
-                g.drawRect(j*150+100, i*150+100, 150, 150);
-                g.fillRect(j*150+100, i*150+100, 150, 150);
+                bufferG.drawRect(j*150+100, i*150+100, 150, 150);
+                bufferG.fillRect(j*150+100, i*150+100, 150, 150);
             }
         }
 
         //draw lines
 
         ArrayList<Line> lines = gameData.getLines();
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(20));
+        bufferG.setStroke(new BasicStroke(20));
         for(int i = 0; i<lines.size();i++)
         {
             if(lines.get(i).getStatus() == Line.GRAY)
             {
-                g2.setColor(Color.DARK_GRAY);
+                bufferG.setColor(Color.DARK_GRAY);
             }
             else if(lines.get(i).getStatus() == Line.BLUE)
             {
-                g2.setColor(Color.BLUE);
+                bufferG.setColor(Color.BLUE);
             }
             else if(lines.get(i).getStatus() == Line.RED)
             {
-                g2.setColor(Color.RED);
+                bufferG.setColor(Color.RED);
             }
             else
             {
-                g2.setColor(Color.PINK);
+                bufferG.setColor(Color.PINK);
             }
-            g2.drawLine(lines.get(i).getX1()*150+100, lines.get(i).getY1()*150+100, lines.get(i).getX2()*150+100, lines.get(i).getY2()*150+100);
+            bufferG.drawLine(lines.get(i).getX1()*150+100, lines.get(i).getY1()*150+100, lines.get(i).getX2()*150+100, lines.get(i).getY2()*150+100);
         }
 
         //dots
-        g.setColor(Color.BLACK);
+        bufferG.setColor(Color.BLACK);
         for(int i = 0 ; i<6; i++)
         {
             for(int j = 0; j<6;j++)
             {
-                g.drawOval(j*150+90, i*150+90, 20, 20);
-                g.fillOval(j*150+90, i*150+90, 20, 20);
+                bufferG.drawOval(j*150+90, i*150+90, 20, 20);
+                bufferG.fillOval(j*150+90, i*150+90, 20, 20);
             }
         }
+        g = getGraphics(); // get the graphics context for the screen
+        g.drawImage(buffer, 0, 0, null); // draw the buffer onto the screen
+        g.dispose(); // dispose of the graphics context
 
 
     }
@@ -967,18 +975,19 @@ public class DotsAndBoxesFrame extends JFrame implements MouseListener, KeyListe
 
     @Override
     public void keyTyped(KeyEvent e) {
-//        if(e.getKeyChar() == 'r')
-//        {
-//            System.out.println("r pressed");
-//            try {
-//                os.writeObject(new CommandFromClient(CommandFromClient.RESTART, null));
-//                gameData.reset();
-//            } catch (Exception e1) {
-//                e1.printStackTrace();
-//            }
-//            setText("R's turn");
-//            repaint();
-//        }
+        System.out.println(e.getKeyChar());
+        if(e.getKeyChar() == 'r')
+        {
+            System.out.println("r pressed");
+            try {
+                os.writeObject(new CommandFromClient(CommandFromClient.RESTART, null));
+                gameData.reset();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+            setText("R's turn");
+            repaint();
+        }
     }
 
     @Override

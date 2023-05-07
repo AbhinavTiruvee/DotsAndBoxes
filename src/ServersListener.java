@@ -552,7 +552,14 @@ public class ServersListener implements Runnable
                 }
                 else if(cfc.getCommand() == CommandFromClient.RESTART)
                 {
-                    gameData.reset();
+                    gameData.boxes = new char[5][5];
+                    for(int r=0;r<gameData.boxes.length; r++)
+                        for(int c=0; c<gameData.boxes[0].length; c++)
+                            gameData.boxes[r][c]=' ';
+                    for(int i = 0; i<gameData.getLines().size();i++)
+                    {
+                        gameData.getLines().get(i).setStatus(Line.GRAY);
+                    }
                     setTurn('R');
                 }
                 else if(cfc.getCommand() == CommandFromClient.CLOSED)
