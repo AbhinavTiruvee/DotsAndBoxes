@@ -33,7 +33,6 @@ public class ClientsListener implements Runnable
                 {
                     String data = cfs.getData();
                     // pulls data for the move from the data field
-
                     String line = data.substring(0,data.indexOf("&"));
                     char player = data.charAt(data.indexOf("&")+1);
                     // changes the board and redraw the screen

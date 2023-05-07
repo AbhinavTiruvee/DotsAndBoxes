@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-public class DotsAndBoxesFrame extends JFrame implements MouseListener
+public class DotsAndBoxesFrame extends JFrame implements MouseListener, KeyListener
 {
     private String text = "";
     // the letter you are playing as
@@ -636,25 +636,6 @@ public class DotsAndBoxesFrame extends JFrame implements MouseListener
         repaint();
     }
 
-    public static boolean isWinner(char player)
-    {
-        if(redScore+ blueScore !=25)
-        {
-            return false;
-        }
-        else
-        {
-            if(player =='R')
-            {
-                return redScore>blueScore;
-            }
-            else if(player == 'B')
-            {
-                return blueScore>redScore;
-            }
-        }
-        return false;
-    }
     public void printBoard()
     {
         for(int i = 0; i<gameData.getBoxes().length;i++)
@@ -981,6 +962,32 @@ public class DotsAndBoxesFrame extends JFrame implements MouseListener
 
     @Override
     public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+//        if(e.getKeyChar() == 'r')
+//        {
+//            System.out.println("r pressed");
+//            try {
+//                os.writeObject(new CommandFromClient(CommandFromClient.RESTART, null));
+//                gameData.reset();
+//            } catch (Exception e1) {
+//                e1.printStackTrace();
+//            }
+//            setText("R's turn");
+//            repaint();
+//        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 }

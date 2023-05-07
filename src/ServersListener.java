@@ -51,9 +51,497 @@ public class ServersListener implements Runnable
                 {
                     // pulls data for the move from the data field
                     String data=cfc.getData();
-                    int c = data.charAt(0) - '0';
-                    int r = data.charAt(1) - '0';
+                    System.out.println(data);
+                    String line = data.substring(0,data.indexOf("&"));
+                    char player = data.charAt(data.indexOf("&")+1);
+                    if(player == 'R')
+                    {
+                        if(line.equals("line1"))
+                        {
+                            gameData.getLine1().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line2"))
+                        {
+                            gameData.getLine2().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line3"))
+                        {
+                            gameData.getLine3().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line4"))
+                        {
+                            gameData.getLine4().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line5"))
+                        {
+                            gameData.getLine5().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line6"))
+                        {
+                            gameData.getLine6().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line7"))
+                        {
+                            gameData.getLine7().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line8"))
+                        {
+                            gameData.getLine8().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line9"))
+                        {
+                            gameData.getLine9().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line10"))
+                        {
+                            gameData.getLine10().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line11"))
+                        {
+                            gameData.getLine11().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line12"))
+                        {
+                            gameData.getLine12().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line13"))
+                        {
+                            gameData.getLine13().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line14"))
+                        {
+                            gameData.getLine14().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line15"))
+                        {
+                            gameData.getLine15().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line16"))
+                        {
+                            gameData.getLine16().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line17"))
+                        {
+                            gameData.getLine17().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line18"))
+                        {
+                            gameData.getLine18().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line19"))
+                        {
+                            gameData.getLine19().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line20"))
+                        {
+                            gameData.getLine20().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line21"))
+                        {
+                            gameData.getLine21().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line22"))
+                        {
+                            gameData.getLine22().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line23"))
+                        {
+                            gameData.getLine23().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line24"))
+                        {
+                            gameData.getLine24().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line25"))
+                        {
+                            gameData.getLine25().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line26"))
+                        {
+                            gameData.getLine26().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line27"))
+                        {
+                            gameData.getLine27().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line28"))
+                        {
+                            gameData.getLine28().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line29"))
+                        {
+                            gameData.getLine29().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line30"))
+                        {
+                            gameData.getLine30().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line31"))
+                        {
+                            gameData.getLine31().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line32"))
+                        {
+                            gameData.getLine32().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line33"))
+                        {
+                            gameData.getLine33().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line34"))
+                        {
+                            gameData.getLine34().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line35"))
+                        {
+                            gameData.getLine35().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line36"))
+                        {
+                            gameData.getLine36().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line37"))
+                        {
+                            gameData.getLine37().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line38"))
+                        {
+                            gameData.getLine38().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line39"))
+                        {
+                            gameData.getLine39().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line40"))
+                        {
+                            gameData.getLine40().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line41"))
+                        {
+                            gameData.getLine41().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line42"))
+                        {
+                            gameData.getLine42().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line43"))
+                        {
+                            gameData.getLine43().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line44"))
+                        {
+                            gameData.getLine44().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line45"))
+                        {
+                            gameData.getLine45().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line46"))
+                        {
+                            gameData.getLine46().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line47"))
+                        {
+                            gameData.getLine47().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line48"))
+                        {
+                            gameData.getLine48().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line49"))
+                        {
+                            gameData.getLine49().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line50"))
+                        {
+                            gameData.getLine50().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line51"))
+                        {
+                            gameData.getLine51().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line52"))
+                        {
+                            gameData.getLine52().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line53"))
+                        {
+                            gameData.getLine53().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line54"))
+                        {
+                            gameData.getLine54().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line55"))
+                        {
+                            gameData.getLine55().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line56"))
+                        {
+                            gameData.getLine56().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line57"))
+                        {
+                            gameData.getLine57().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line58"))
+                        {
+                            gameData.getLine58().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line59"))
+                        {
+                            gameData.getLine59().setStatus(Line.RED);
+                        }
+                        else if(line.equals("line60"))
+                        {
+                            gameData.getLine60().setStatus(Line.RED);
+                        }
 
+                    }
+                    else if(player == 'B')
+                    {
+                        if(line.equals("line1"))
+                        {
+                            gameData.getLine1().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line2"))
+                        {
+                            gameData.getLine2().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line3"))
+                        {
+                            gameData.getLine3().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line4"))
+                        {
+                            gameData.getLine4().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line5"))
+                        {
+                            gameData.getLine5().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line6"))
+                        {
+                            gameData.getLine6().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line7"))
+                        {
+                            gameData.getLine7().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line8"))
+                        {
+                            gameData.getLine8().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line9"))
+                        {
+                            gameData.getLine9().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line10"))
+                        {
+                            gameData.getLine10().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line11"))
+                        {
+                            gameData.getLine11().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line12"))
+                        {
+                            gameData.getLine12().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line13"))
+                        {
+                            gameData.getLine13().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line14"))
+                        {
+                            gameData.getLine14().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line15"))
+                        {
+                            gameData.getLine15().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line16"))
+                        {
+                            gameData.getLine16().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line17"))
+                        {
+                            gameData.getLine17().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line18"))
+                        {
+                            gameData.getLine18().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line19"))
+                        {
+                            gameData.getLine19().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line20"))
+                        {
+                            gameData.getLine20().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line21"))
+                        {
+                            gameData.getLine21().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line22"))
+                        {
+                            gameData.getLine22().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line23"))
+                        {
+                            gameData.getLine23().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line24"))
+                        {
+                            gameData.getLine24().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line25"))
+                        {
+                            gameData.getLine25().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line26"))
+                        {
+                            gameData.getLine26().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line27"))
+                        {
+                            gameData.getLine27().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line28"))
+                        {
+                            gameData.getLine28().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line29"))
+                        {
+                            gameData.getLine29().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line30"))
+                        {
+                            gameData.getLine30().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line31"))
+                        {
+                            gameData.getLine31().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line32"))
+                        {
+                            gameData.getLine32().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line33"))
+                        {
+                            gameData.getLine33().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line34"))
+                        {
+                            gameData.getLine34().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line35"))
+                        {
+                            gameData.getLine35().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line36"))
+                        {
+                            gameData.getLine36().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line37"))
+                        {
+                            gameData.getLine37().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line38"))
+                        {
+                            gameData.getLine38().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line39"))
+                        {
+                            gameData.getLine39().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line40"))
+                        {
+                            gameData.getLine40().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line41"))
+                        {
+                            gameData.getLine41().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line42"))
+                        {
+                            gameData.getLine42().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line43"))
+                        {
+                            gameData.getLine43().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line44"))
+                        {
+                            gameData.getLine44().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line45"))
+                        {
+                            gameData.getLine45().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line46"))
+                        {
+                            gameData.getLine46().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line47"))
+                        {
+                            gameData.getLine47().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line48"))
+                        {
+                            gameData.getLine48().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line49"))
+                        {
+                            gameData.getLine49().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line50"))
+                        {
+                            gameData.getLine50().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line51"))
+                        {
+                            gameData.getLine51().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line52"))
+                        {
+                            gameData.getLine52().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line53"))
+                        {
+                            gameData.getLine53().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line54"))
+                        {
+                            gameData.getLine54().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line55"))
+                        {
+                            gameData.getLine55().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line56"))
+                        {
+                            gameData.getLine56().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line57"))
+                        {
+                            gameData.getLine57().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line58"))
+                        {
+                            gameData.getLine58().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line59"))
+                        {
+                            gameData.getLine59().setStatus(Line.BLUE);
+                        }
+                        else if(line.equals("line60"))
+                        {
+                            gameData.getLine60().setStatus(Line.BLUE);
+                        }
+                    }
+                    gameData.setBoxes(line, player);
 
                     // sends the move out to both players
                     sendCommand(new CommandFromServer(CommandFromServer.MOVE,data));

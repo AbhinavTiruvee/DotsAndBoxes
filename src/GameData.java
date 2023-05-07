@@ -79,8 +79,6 @@ public class GameData
             {' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' '}};
-    public int redScore = 0;
-    public int blueScore = 0;
 
 
     public void addLines()
@@ -167,6 +165,7 @@ public class GameData
 
     public boolean isWinner(char player)
     {
+        System.out.println("board:");
         printBoard();
         int numPlayerBoxes = 0;
         for(int i = 0; i<boxes.length;i++)
@@ -194,6 +193,23 @@ public class GameData
         }
 
 
+    }
+    public void printBoard()
+    {
+        for(int i = 0; i<getBoxes().length;i++)
+        {
+            for(int j = 0; j<getBoxes()[0].length; j++)
+            {
+                if(getBoxes()[i][j] == ' ')
+                {
+                    System.out.print("*");
+                }
+                else {
+                    System.out.print(getBoxes()[i][j]);
+                }
+            }
+            System.out.println();
+        }
     }
 
     public int score(char player)
@@ -794,6 +810,8 @@ public class GameData
                 boxes[4][4] = player;
             }
         }
+        System.out.println("board after move:");
+        printBoard();
     }
 
     public Line getLine1() {
@@ -1036,21 +1054,5 @@ public class GameData
         return line60;
     }
 
-    public void printBoard()
-    {
-        for(int i = 0; i<getBoxes().length;i++)
-        {
-            for(int j = 0; j<getBoxes()[0].length; j++)
-            {
-                if(getBoxes()[i][j] == ' ')
-                {
-                    System.out.print("*");
-                }
-                else {
-                    System.out.print(getBoxes()[i][j]);
-                }
-            }
-            System.out.println();
-        }
-    }
+
 }
