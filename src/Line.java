@@ -8,7 +8,7 @@ public class Line
     public static final int GRAY = 0;
     public static final int BLUE = 1;
     public static final int RED = 2;
-    public static int status;
+    public int status;
 
     public Line(int x1, int y1, int x2, int y2)
     {

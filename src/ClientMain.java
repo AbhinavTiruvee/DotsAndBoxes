@@ -7,7 +7,7 @@ public class ClientMain
     public static void main(String[] args)
     {
         try {
-            // create an object for the TTT game
+            // create an object for the game
             GameData gameData = new GameData();
 
             // create a connection to server

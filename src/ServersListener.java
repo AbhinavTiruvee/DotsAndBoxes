@@ -47,19 +47,12 @@ public class ServersListener implements Runnable
                 // handle the received command
                 else if(cfc.getCommand()==CommandFromClient.MOVE &&
                         turn==player && !gameData.isWinner('R')
-                        && !gameData.isWinner('Y'))
+                        && !gameData.isWinner('B'))
                 {
                     // pulls data for the move from the data field
                     String data=cfc.getData();
                     int c = data.charAt(0) - '0';
                     int r = data.charAt(1) - '0';
-
-                    // if the move is invalid it, do not process it
-//                    if(gameData.getGrid()[r][c]!=' ')
-//                        continue;
-
-                    // changes the server side game board
-//                    gameData.getGrid()[r][c] = player;                    gameData.getGrid()[r][c] = player;
 
 
                     // sends the move out to both players
@@ -90,10 +83,9 @@ public class ServersListener implements Runnable
     {
         // changes the turn
         if(turn=='R')
-            turn = 'Y';
+            turn = 'B';
         else
             turn ='R';
-
         // informs both client of the new player turn
         if (turn == 'R')
             sendCommand(new CommandFromServer(CommandFromServer.R_TURN, null));
@@ -111,7 +103,7 @@ public class ServersListener implements Runnable
         int command = -1;
         if(gameData.isWinner('R'))
             command = CommandFromServer.R_WINS;
-        else if(gameData.isWinner('Y'))
+        else if(gameData.isWinner('B'))
             command = CommandFromServer.B_WINS;
 
         // if the game ended, informs both clients of the game's end state

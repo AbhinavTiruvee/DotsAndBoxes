@@ -24,7 +24,6 @@ public class ClientsListener implements Runnable
             while(true)
             {
                 CommandFromServer cfs = (CommandFromServer)is.readObject();
-
                 // processes the received command
                 if(cfs.getCommand() == CommandFromServer.R_TURN)
                     frame.setTurn('R');
@@ -34,11 +33,11 @@ public class ClientsListener implements Runnable
                 {
                     String data = cfs.getData();
                     // pulls data for the move from the data field
-                    int c = data.charAt(0) - '0';
-                    int r = data.charAt(1) - '0';
 
+                    String line = data.substring(0,data.indexOf("&"));
+                    char player = data.charAt(data.indexOf("&")+1);
                     // changes the board and redraw the screen
-                    frame.makeMove();
+                    frame.makeMove(line, player);
                 }
                 // handles the various end game states
                 else if(cfs.getCommand() == CommandFromServer.TIE)

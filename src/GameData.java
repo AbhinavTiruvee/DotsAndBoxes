@@ -74,26 +74,17 @@ public class GameData
     public Line line60 = new Line(4,5,5,5);
     public ArrayList<Line> lines = new ArrayList<>();
 
-    //keep going
-    public char[][] boxes;
+    public char[][] boxes = {{' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' '}};
+    public int redScore = 0;
+    public int blueScore = 0;
 
 
-    public int redScore;
-    public int blueScore;
-
-    public GameData()
+    public void addLines()
     {
-        redScore = 0;
-        blueScore = 0;
-        boxes = new char[5][5];
-        for(int i = 0; i< boxes.length; i++)
-        {
-            for(int j = 0; j< boxes[0].length; j++)
-            {
-                boxes[i][j] = ' ';
-            }
-        }
-        //add all lines to line
         lines.add(line1);
         lines.add(line2);
         lines.add(line3);
@@ -168,7 +159,6 @@ public class GameData
 
     public void reset()
     {
-
         boxes = new char[5][5];
         for(int r=0;r<boxes.length; r++)
             for(int c=0; c<boxes[0].length; c++)
@@ -177,285 +167,890 @@ public class GameData
 
     public boolean isWinner(char player)
     {
-        int numBoxesPlayerColor = 0;
-
-        //if theres an empty box, return false
-        //if all the boxes are full, see if the player has the most boxes
-        for(int i = 0; i<boxes.length; i++)
+        printBoard();
+        int numPlayerBoxes = 0;
+        for(int i = 0; i<boxes.length;i++)
         {
             for(int j = 0; j<boxes[0].length; j++)
             {
                 if(boxes[i][j] == ' ')
                 {
+                    System.out.println(i+" "+j+" ");
                     return false;
                 }
                 else if(boxes[i][j] == player)
+                {
+                    numPlayerBoxes++;
+                }
+            }
+        }
+        if (numPlayerBoxes>=13)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+
+    }
+
+    public int score(char player)
+    {
+        int numBoxesPlayerColor = 0;
+        for(int i = 0; i<boxes.length; i++)
+        {
+            for(int j = 0; j<boxes[0].length; j++)
+            {
+                if(boxes[i][j] == player)
                 {
                     numBoxesPlayerColor++;
                 }
             }
         }
-
-        return numBoxesPlayerColor >= 13;
-
+        return numBoxesPlayerColor;
     }
 
-    public void setBoxes()
+    public void setBoxes(String line, char player)
     {
-        //box 0,0
-        if(line1.getStatus() == Line.RED && line6.getStatus() == Line.RED && line7.getStatus() == Line.RED && line12.getStatus() == Line.RED)
+        if(line.equals("line1"))
         {
-            boxes[0][0] = 'R';
+            if(line6.getStatus() !=Line.GRAY && line7.getStatus() !=Line.GRAY && line12.getStatus() !=Line.GRAY)
+            {
+                boxes[0][0] = player;
+            }
         }
-        else if(line1.getStatus() == Line.BLUE && line6.getStatus() == Line.BLUE && line7.getStatus() == Line.BLUE && line12.getStatus() == Line.BLUE)
+        else if(line.equals("line2"))
         {
-            boxes[0][0] = 'B';
+            if(line7.getStatus() !=Line.GRAY && line8.getStatus() !=Line.GRAY && line13.getStatus() !=Line.GRAY)
+            {
+                boxes[0][1] = player;
+            }
         }
+        else if(line.equals("line3"))
+        {
+            if(line8.getStatus() !=Line.GRAY && line9.getStatus() !=Line.GRAY && line14.getStatus() !=Line.GRAY)
+            {
+                boxes[0][2] = player;
+            }
+        }
+        else if(line.equals("line4"))
+        {
+            if(line9.getStatus() !=Line.GRAY && line10.getStatus() !=Line.GRAY && line15.getStatus() !=Line.GRAY)
+            {
+                boxes[0][3] = player;
+            }
+        }
+        else if(line.equals("line5"))
+        {
+            if(line10.getStatus() !=Line.GRAY && line11.getStatus() !=Line.GRAY && line16.getStatus() !=Line.GRAY)
+            {
+                boxes[0][4] = player;
+            }
+        }
+        else if(line.equals("line6"))
+        {
+            if(line1.getStatus() !=Line.GRAY && line7.getStatus() !=Line.GRAY && line12.getStatus() !=Line.GRAY)
+            {
+                boxes[0][0] = player;
+            }
+        }
+        else if(line.equals("line7"))
+        {
+            if(line1.getStatus() !=Line.GRAY && line6.getStatus() !=Line.GRAY && line12.getStatus() !=Line.GRAY)
+            {
+                boxes[0][0] = player;
+            }
+            if(line2.getStatus() !=Line.GRAY && line8.getStatus() !=Line.GRAY && line13.getStatus() !=Line.GRAY)
+            {
+                boxes[0][1] = player;
+            }
+        }
+        else if(line.equals("line8"))
+        {
+            if(line2.getStatus() !=Line.GRAY && line7.getStatus() !=Line.GRAY && line13.getStatus() !=Line.GRAY)
+            {
+                boxes[0][1] = player;
+            }
+            if(line3.getStatus() !=Line.GRAY && line9.getStatus() !=Line.GRAY && line14.getStatus() !=Line.GRAY)
+            {
+                boxes[0][2] = player;
+            }
+        }
+        else if(line.equals("line9"))
+        {
+            if(line3.getStatus() !=Line.GRAY && line8.getStatus() !=Line.GRAY && line14.getStatus() !=Line.GRAY)
+            {
+                boxes[0][2] = player;
+            }
+            if(line4.getStatus() !=Line.GRAY && line10.getStatus() !=Line.GRAY && line15.getStatus() !=Line.GRAY)
+            {
+                boxes[0][3] = player;
+            }
+        }
+        else if(line.equals("line10"))
+        {
+            if(line4.getStatus() !=Line.GRAY && line9.getStatus() !=Line.GRAY && line15.getStatus() !=Line.GRAY)
+            {
+                boxes[0][3] = player;
+            }
+            if(line5.getStatus() !=Line.GRAY && line11.getStatus() !=Line.GRAY && line16.getStatus() !=Line.GRAY)
+            {
+                boxes[0][4] = player;
+            }
+        }
+        else if(line.equals("line11"))
+        {
+            if(line5.getStatus() !=Line.GRAY && line10.getStatus() !=Line.GRAY && line16.getStatus() !=Line.GRAY)
+            {
+                boxes[0][4] = player;
+            }
+        }
+        else if(line.equals("line12"))
+        {
+            if(line1.getStatus() !=Line.GRAY && line6.getStatus() !=Line.GRAY && line7.getStatus() !=Line.GRAY)
+            {
+                boxes[0][0] = player;
+            }
+            if(line17.getStatus() !=Line.GRAY && line18.getStatus() !=Line.GRAY && line23.getStatus() !=Line.GRAY)
+            {
+                boxes[1][0] = player;
+            }
+        }
+        else if(line.equals("line13"))
+        {
+            if(line2.getStatus() !=Line.GRAY && line8.getStatus() !=Line.GRAY && line7.getStatus() !=Line.GRAY)
+            {
+                boxes[0][1] = player;
+            }
+            if(line18.getStatus() !=Line.GRAY && line19.getStatus() !=Line.GRAY && line24.getStatus() !=Line.GRAY)
+            {
+                boxes[1][1] = player;
+            }
+        }
+        else if(line.equals("line14"))
+        {
+            if(line3.getStatus() !=Line.GRAY && line8.getStatus() !=Line.GRAY && line9.getStatus() !=Line.GRAY)
+            {
+                boxes[0][2] = player;
+            }
+            if(line19.getStatus() !=Line.GRAY && line20.getStatus() !=Line.GRAY && line25.getStatus() !=Line.GRAY)
+            {
+                boxes[1][2] = player;
+            }
+        }
+        else if(line.equals("line15"))
+        {
+            if(line4.getStatus() !=Line.GRAY && line9.getStatus() !=Line.GRAY && line10.getStatus() !=Line.GRAY)
+            {
+                boxes[0][3] = player;
+            }
+            if(line20.getStatus() !=Line.GRAY && line21.getStatus() !=Line.GRAY && line26.getStatus() !=Line.GRAY)
+            {
+                boxes[1][3] = player;
+            }
+        }
+        else if(line.equals("line16"))
+        {
+            if(line5.getStatus() !=Line.GRAY && line10.getStatus() !=Line.GRAY && line11.getStatus() !=Line.GRAY)
+            {
+                boxes[0][4] = player;
+            }
+            if(line21.getStatus() !=Line.GRAY && line22.getStatus() !=Line.GRAY && line27.getStatus() !=Line.GRAY)
+            {
+                boxes[1][4] = player;
+            }
+        }
+        else if(line.equals("line17"))
+        {
+            if(line12.getStatus() !=Line.GRAY && line18.getStatus() !=Line.GRAY && line23.getStatus() !=Line.GRAY)
+            {
+                boxes[1][0] = player;
+            }
+        }
+        else if(line.equals("line18"))
+        {
+            if(line12.getStatus() !=Line.GRAY && line17.getStatus() !=Line.GRAY && line23.getStatus() !=Line.GRAY)
+            {
+                boxes[1][0] = player;
+            }
+            if(line13.getStatus() !=Line.GRAY && line19.getStatus() !=Line.GRAY && line24.getStatus() !=Line.GRAY)
+            {
+                boxes[1][1] = player;
+            }
+        }
+        else if(line.equals("line19"))
+        {
+            if(line13.getStatus() !=Line.GRAY && line18.getStatus() !=Line.GRAY && line24.getStatus() !=Line.GRAY)
+            {
+                boxes[1][1] = player;
+            }
+            if(line14.getStatus() !=Line.GRAY && line20.getStatus() !=Line.GRAY && line25.getStatus() !=Line.GRAY)
+            {
+                boxes[1][2] = player;
+            }
+        }
+        else if(line.equals("line20"))
+        {
+            if(line14.getStatus() !=Line.GRAY && line19.getStatus() !=Line.GRAY && line25.getStatus() !=Line.GRAY)
+            {
+                boxes[1][2] = player;
+            }
+            if(line15.getStatus() !=Line.GRAY && line21.getStatus() !=Line.GRAY && line26.getStatus() !=Line.GRAY)
+            {
+                boxes[1][3] = player;
+            }
+        }
+        else if(line.equals("line21"))
+        {
+            if(line15.getStatus() !=Line.GRAY && line20.getStatus() !=Line.GRAY && line26.getStatus() !=Line.GRAY)
+            {
+                boxes[1][3] = player;
+            }
+            if(line16.getStatus() !=Line.GRAY && line22.getStatus() !=Line.GRAY && line27.getStatus() !=Line.GRAY)
+            {
+                boxes[1][4] = player;
+            }
+        }
+        else if(line.equals("line22"))
+        {
+            if(line16.getStatus() !=Line.GRAY && line21.getStatus() !=Line.GRAY && line27.getStatus() !=Line.GRAY)
+            {
+                boxes[1][4] = player;
+            }
+        }
+        else if(line.equals("line23"))
+        {
+            if(line12.getStatus() !=Line.GRAY && line17.getStatus() !=Line.GRAY && line18.getStatus() !=Line.GRAY)
+            {
+                boxes[1][0] = player;
+            }
+            if(line28.getStatus() !=Line.GRAY && line29.getStatus() !=Line.GRAY && line34.getStatus() !=Line.GRAY)
+            {
+                boxes[2][0] = player;
+            }
+        }
+        else if(line.equals("line24"))
+        {
+            if(line13.getStatus() !=Line.GRAY && line18.getStatus() !=Line.GRAY && line19.getStatus() !=Line.GRAY)
+            {
+                boxes[1][1] = player;
+            }
+            if(line29.getStatus() !=Line.GRAY && line30.getStatus() !=Line.GRAY && line35.getStatus() !=Line.GRAY)
+            {
+                boxes[2][1] = player;
+            }
+        }
+        else if(line.equals("line25"))
+        {
+            if(line14.getStatus() !=Line.GRAY && line19.getStatus() !=Line.GRAY && line20.getStatus() !=Line.GRAY)
+            {
+                boxes[1][2] = player;
+            }
+            if(line30.getStatus() !=Line.GRAY && line31.getStatus() !=Line.GRAY && line36.getStatus() !=Line.GRAY)
+            {
+                boxes[2][2] = player;
+            }
+        }
+        else if(line.equals("line26"))
+        {
+            if(line15.getStatus() !=Line.GRAY && line20.getStatus() !=Line.GRAY && line21.getStatus() !=Line.GRAY)
+            {
+                boxes[1][3] = player;
+            }
+            if(line31.getStatus() !=Line.GRAY && line32.getStatus() !=Line.GRAY && line37.getStatus() !=Line.GRAY)
+            {
+                boxes[2][3] = player;
+            }
+        }
+        else if(line.equals("line27"))
+        {
+            if(line16.getStatus() !=Line.GRAY && line21.getStatus() !=Line.GRAY && line22.getStatus() !=Line.GRAY)
+            {
+                boxes[1][4] = player;
+            }
+            if(line32.getStatus() !=Line.GRAY && line33.getStatus() !=Line.GRAY && line38.getStatus() !=Line.GRAY)
+            {
+                boxes[2][4] = player;
+            }
+        }
+        else if(line.equals("line28"))
+        {
+            if(line23.getStatus() !=Line.GRAY && line29.getStatus() !=Line.GRAY && line34.getStatus() !=Line.GRAY)
+            {
+                boxes[2][0] = player;
+            }
+        }
+        else if(line.equals("line29"))
+        {
+            if(line23.getStatus() !=Line.GRAY && line28.getStatus() !=Line.GRAY && line34.getStatus() !=Line.GRAY)
+            {
+                boxes[2][0] = player;
+            }
+            if(line24.getStatus() !=Line.GRAY && line30.getStatus() !=Line.GRAY && line35.getStatus() !=Line.GRAY)
+            {
+                boxes[2][1] = player;
+            }
+        }
+        else if(line.equals("line30"))
+        {
+            if(line24.getStatus() !=Line.GRAY && line29.getStatus() !=Line.GRAY && line35.getStatus() !=Line.GRAY)
+            {
+                boxes[2][1] = player;
+            }
+            if(line25.getStatus() !=Line.GRAY && line31.getStatus() !=Line.GRAY && line36.getStatus() !=Line.GRAY)
+            {
+                boxes[2][2] = player;
+            }
+        }
+        else if(line.equals("line31"))
+        {
+            if(line25.getStatus() !=Line.GRAY && line30.getStatus() !=Line.GRAY && line36.getStatus() !=Line.GRAY)
+            {
+                boxes[2][2] = player;
+            }
+            if(line26.getStatus() !=Line.GRAY && line32.getStatus() !=Line.GRAY && line37.getStatus() !=Line.GRAY)
+            {
+                boxes[2][3] = player;
+            }
+        }
+        else if(line.equals("line32"))
+        {
+            if(line26.getStatus() !=Line.GRAY && line31.getStatus() !=Line.GRAY && line37.getStatus() !=Line.GRAY)
+            {
+                boxes[2][3] = player;
+            }
+            if(line27.getStatus() !=Line.GRAY && line33.getStatus() !=Line.GRAY && line38.getStatus() !=Line.GRAY)
+            {
+                boxes[2][4] = player;
+            }
+        }
+        else if(line.equals("line33"))
+        {
+            if(line27.getStatus() !=Line.GRAY && line32.getStatus() !=Line.GRAY && line38.getStatus() !=Line.GRAY)
+            {
+                boxes[2][4] = player;
+            }
+        }
+        else if(line.equals("line34"))
+        {
+            if(line23.getStatus() !=Line.GRAY && line28.getStatus() !=Line.GRAY && line29.getStatus() !=Line.GRAY)
+            {
+                boxes[2][0] = player;
+            }
+            if(line39.getStatus() !=Line.GRAY && line40.getStatus() !=Line.GRAY && line45.getStatus() !=Line.GRAY)
+            {
+                boxes[3][0] = player;
+            }
+        }
+        else if(line.equals("line35"))
+        {
+            if(line24.getStatus() !=Line.GRAY && line29.getStatus() !=Line.GRAY && line30.getStatus() !=Line.GRAY)
+            {
+                boxes[2][1] = player;
+            }
+            if(line40.getStatus() !=Line.GRAY && line41.getStatus() !=Line.GRAY && line46.getStatus() !=Line.GRAY)
+            {
+                boxes[3][1] = player;
+            }
+        }
+        else if(line.equals("line36"))
+        {
+            if(line25.getStatus() !=Line.GRAY && line30.getStatus() !=Line.GRAY && line31.getStatus() !=Line.GRAY)
+            {
+                boxes[2][2] = player;
+            }
+            if(line41.getStatus() !=Line.GRAY && line42.getStatus() !=Line.GRAY && line47.getStatus() !=Line.GRAY)
+            {
+                boxes[3][2] = player;
+            }
+        }
+        else if(line.equals("line37"))
+        {
+            if(line26.getStatus() !=Line.GRAY && line31.getStatus() !=Line.GRAY && line32.getStatus() !=Line.GRAY)
+            {
+                boxes[2][3] = player;
+            }
+            if(line42.getStatus() !=Line.GRAY && line43.getStatus() !=Line.GRAY && line48.getStatus() !=Line.GRAY)
+            {
+                boxes[3][3] = player;
+            }
+        }
+        else if(line.equals("line38"))
+        {
+            if(line27.getStatus() !=Line.GRAY && line32.getStatus() !=Line.GRAY && line33.getStatus() !=Line.GRAY)
+            {
+                boxes[2][4] = player;
+            }
+            if(line43.getStatus() !=Line.GRAY && line44.getStatus() !=Line.GRAY && line49.getStatus() !=Line.GRAY)
+            {
+                boxes[3][4] = player;
+            }
+        }
+        else if(line.equals("line39"))
+        {
+            if(line34.getStatus() !=Line.GRAY && line40.getStatus() !=Line.GRAY && line45.getStatus() !=Line.GRAY)
+            {
+                boxes[3][0] = player;
+            }
+        }
+        else if(line.equals("line40"))
+        {
+            if(line34.getStatus() !=Line.GRAY && line39.getStatus() !=Line.GRAY && line45.getStatus() !=Line.GRAY)
+            {
+                boxes[3][0] = player;
+            }
+            if(line35.getStatus() !=Line.GRAY && line41.getStatus() !=Line.GRAY && line46.getStatus() !=Line.GRAY)
+            {
+                boxes[3][1] = player;
+            }
+        }
+        else if(line.equals("line41"))
+        {
+            if(line35.getStatus() !=Line.GRAY && line40.getStatus() !=Line.GRAY && line46.getStatus() !=Line.GRAY)
+            {
+                boxes[3][1] = player;
+            }
+            if(line36.getStatus() !=Line.GRAY && line42.getStatus() !=Line.GRAY && line47.getStatus() !=Line.GRAY)
+            {
+                boxes[3][2] = player;
+            }
+        }
+        else if(line.equals("line42"))
+        {
+            if(line36.getStatus() !=Line.GRAY && line41.getStatus() !=Line.GRAY && line47.getStatus() !=Line.GRAY)
+            {
+                boxes[3][2] = player;
+            }
+            if(line37.getStatus() !=Line.GRAY && line43.getStatus() !=Line.GRAY && line48.getStatus() !=Line.GRAY)
+            {
+                boxes[3][3] = player;
+            }
+        }
+        else if(line.equals("line43"))
+        {
+            if(line37.getStatus() !=Line.GRAY && line42.getStatus() !=Line.GRAY && line48.getStatus() !=Line.GRAY)
+            {
+                boxes[3][3] = player;
+            }
+            if(line38.getStatus() !=Line.GRAY && line44.getStatus() !=Line.GRAY && line49.getStatus() !=Line.GRAY)
+            {
+                boxes[3][4] = player;
+            }
+        }
+        else if(line.equals("line44"))
+        {
+            if(line38.getStatus() !=Line.GRAY && line43.getStatus() !=Line.GRAY && line49.getStatus() !=Line.GRAY)
+            {
+                boxes[3][4] = player;
+            }
+        }
+        else if(line.equals("line45"))
+        {
+            if(line34.getStatus() !=Line.GRAY && line39.getStatus() !=Line.GRAY && line40.getStatus() !=Line.GRAY)
+            {
+                boxes[3][0] = player;
+            }
+            if(line50.getStatus() !=Line.GRAY && line51.getStatus() !=Line.GRAY && line56.getStatus() !=Line.GRAY)
+            {
+                boxes[4][0] = player;
+            }
+        }
+        else if(line.equals("line46"))
+        {
+            if(line35.getStatus() !=Line.GRAY && line40.getStatus() !=Line.GRAY && line41.getStatus() !=Line.GRAY)
+            {
+                boxes[3][1] = player;
+            }
+            if(line51.getStatus() !=Line.GRAY && line52.getStatus() !=Line.GRAY && line57.getStatus() !=Line.GRAY)
+            {
+                boxes[4][1] = player;
+            }
+        }
+        else if(line.equals("line47"))
+        {
+            if(line36.getStatus() !=Line.GRAY && line41.getStatus() !=Line.GRAY && line42.getStatus() !=Line.GRAY)
+            {
+                boxes[3][2] = player;
+            }
+            if(line52.getStatus() !=Line.GRAY && line53.getStatus() !=Line.GRAY && line58.getStatus() !=Line.GRAY)
+            {
+                boxes[4][2] = player;
+            }
+        }
+        else if(line.equals("line48"))
+        {
+            if(line37.getStatus() !=Line.GRAY && line42.getStatus() !=Line.GRAY && line43.getStatus() !=Line.GRAY)
+            {
+                boxes[3][3] = player;
+            }
+            if(line53.getStatus() !=Line.GRAY && line54.getStatus() !=Line.GRAY && line59.getStatus() !=Line.GRAY)
+            {
+                boxes[4][3] = player;
+            }
+        }
+        else if(line.equals("line49"))
+        {
+            if(line38.getStatus() !=Line.GRAY && line43.getStatus() !=Line.GRAY && line44.getStatus() !=Line.GRAY)
+            {
+                boxes[3][4] = player;
+            }
+            if(line54.getStatus() !=Line.GRAY && line55.getStatus() !=Line.GRAY && line60.getStatus() !=Line.GRAY)
+            {
+                boxes[4][4] = player;
+            }
+        }
+        else if(line.equals("line50"))
+        {
+            if(line45.getStatus() !=Line.GRAY && line51.getStatus() !=Line.GRAY && line56.getStatus() !=Line.GRAY)
+            {
+                boxes[4][0] = player;
+            }
+        }
+        else if(line.equals("line51"))
+        {
+            if(line45.getStatus() !=Line.GRAY && line50.getStatus() !=Line.GRAY && line56.getStatus() !=Line.GRAY)
+            {
+                boxes[4][0] = player;
+            }
+            if(line46.getStatus() !=Line.GRAY && line52.getStatus() !=Line.GRAY && line57.getStatus() !=Line.GRAY)
+            {
+                boxes[4][1] = player;
+            }
+        }
+        else if(line.equals("line52"))
+        {
+            if(line46.getStatus() !=Line.GRAY && line51.getStatus() !=Line.GRAY && line57.getStatus() !=Line.GRAY)
+            {
+                boxes[4][1] = player;
+            }
+            if(line47.getStatus() !=Line.GRAY && line53.getStatus() !=Line.GRAY && line58.getStatus() !=Line.GRAY)
+            {
+                boxes[4][2] = player;
+            }
+        }
+        else if(line.equals("line53"))
+        {
+            if(line47.getStatus() !=Line.GRAY && line52.getStatus() !=Line.GRAY && line58.getStatus() !=Line.GRAY)
+            {
+                boxes[4][2] = player;
+            }
+            if(line48.getStatus() !=Line.GRAY && line54.getStatus() !=Line.GRAY && line59.getStatus() !=Line.GRAY)
+            {
+                boxes[4][3] = player;
+            }
+        }
+        else if(line.equals("line54"))
+        {
+            if(line48.getStatus() !=Line.GRAY && line53.getStatus() !=Line.GRAY && line59.getStatus() !=Line.GRAY)
+            {
+                boxes[4][3] = player;
+            }
+            if(line49.getStatus() !=Line.GRAY && line55.getStatus() !=Line.GRAY && line60.getStatus() !=Line.GRAY)
+            {
+                boxes[4][4] = player;
+            }
+        }
+        else if(line.equals("line55"))
+        {
+            if(line49.getStatus() !=Line.GRAY && line54.getStatus() !=Line.GRAY && line60.getStatus() !=Line.GRAY)
+            {
+                boxes[4][4] = player;
+            }
+        }
+        else if(line.equals("line56"))
+        {
+            if(line45.getStatus() !=Line.GRAY && line50.getStatus() !=Line.GRAY && line51.getStatus() !=Line.GRAY)
+            {
+                boxes[4][0] = player;
+            }
+        }
+        else if(line.equals("line57"))
+        {
+            if(line46.getStatus() !=Line.GRAY && line51.getStatus() !=Line.GRAY && line52.getStatus() !=Line.GRAY)
+            {
+                boxes[4][1] = player;
+            }
+        }
+        else if(line.equals("line58"))
+        {
+            if(line47.getStatus() !=Line.GRAY && line52.getStatus() !=Line.GRAY && line53.getStatus() !=Line.GRAY)
+            {
+                boxes[4][2] = player;
+            }
+        }
+        else if(line.equals("line59"))
+        {
+            if(line48.getStatus() !=Line.GRAY && line53.getStatus() !=Line.GRAY && line54.getStatus() !=Line.GRAY)
+            {
+                boxes[4][3] = player;
+            }
+        }
+        else if(line.equals("line60"))
+        {
+            if(line49.getStatus() !=Line.GRAY && line54.getStatus() !=Line.GRAY && line55.getStatus() !=Line.GRAY)
+            {
+                boxes[4][4] = player;
+            }
+        }
+    }
 
-        //box 0,1
-        if(line2.getStatus() == Line.RED && line7.getStatus() == Line.RED && line8.getStatus() == Line.RED && line13.getStatus() == Line.RED)
-        {
-            boxes[0][1] = 'R';
-        }
-        else if(line2.getStatus() == Line.BLUE && line7.getStatus() == Line.BLUE && line8.getStatus() == Line.BLUE && line13.getStatus() == Line.BLUE)
-        {
-            boxes[0][1] = 'B';
-        }
+    public Line getLine1() {
+        return line1;
+    }
 
-        //box 0,2
-        if(line3.getStatus() == Line.RED && line8.getStatus() == Line.RED && line9.getStatus() == Line.RED && line14.getStatus() == Line.RED)
-        {
-            boxes[0][2] = 'R';
-        }
-        else if(line3.getStatus() == Line.BLUE && line8.getStatus() == Line.BLUE && line9.getStatus() == Line.BLUE && line14.getStatus() == Line.BLUE)
-        {
-            boxes[0][2] = 'B';
-        }
+    public Line getLine2() {
+        return line2;
+    }
 
-        //box 0,3
-        if(line4.getStatus() == Line.RED && line9.getStatus() == Line.RED && line10.getStatus() == Line.RED && line15.getStatus() == Line.RED)
-        {
-            boxes[0][3] = 'R';
-        }
-        else if(line4.getStatus() == Line.BLUE && line9.getStatus() == Line.BLUE && line10.getStatus() == Line.BLUE && line15.getStatus() == Line.BLUE)
-        {
-            boxes[0][3] = 'B';
-        }
+    public Line getLine3() {
+        return line3;
+    }
 
-        //box 0,4
-        if(line5.getStatus() == Line.RED && line10.getStatus() == Line.RED && line11.getStatus() == Line.RED && line16.getStatus() == Line.RED)
-        {
-            boxes[0][4] = 'R';
-        }
-        else if(line5.getStatus() == Line.BLUE && line10.getStatus() == Line.BLUE && line11.getStatus() == Line.BLUE && line16.getStatus() == Line.BLUE)
-        {
-            boxes[0][4] = 'B';
-        }
+    public Line getLine4() {
+        return line4;
+    }
 
-        //box 1,0
-        if(line12.getStatus() == Line.RED && line17.getStatus() == Line.RED && line18.getStatus() == Line.RED && line23.getStatus() == Line.RED)
-        {
-            boxes[1][0] = 'R';
-        }
-        else if(line12.getStatus() == Line.BLUE && line17.getStatus() == Line.BLUE && line18.getStatus() == Line.BLUE && line23.getStatus() == Line.BLUE)
-        {
-            boxes[1][0] = 'B';
-        }
+    public Line getLine5() {
+        return line5;
+    }
 
-        //box 1,1
-        if(line13.getStatus() == Line.RED && line18.getStatus() == Line.RED && line19.getStatus() == Line.RED && line24.getStatus() == Line.RED)
-        {
-            boxes[1][1] = 'R';
-        }
-        else if(line13.getStatus() == Line.BLUE && line18.getStatus() == Line.BLUE && line19.getStatus() == Line.BLUE && line24.getStatus() == Line.BLUE)
-        {
-            boxes[1][1] = 'B';
-        }
+    public Line getLine6() {
+        return line6;
+    }
 
-        //box 1,2
-        if(line14.getStatus() == Line.RED && line19.getStatus() == Line.RED && line20.getStatus() == Line.RED && line25.getStatus() == Line.RED)
-        {
-            boxes[1][2] = 'R';
-        }
-        else if(line14.getStatus() == Line.BLUE && line19.getStatus() == Line.BLUE && line20.getStatus() == Line.BLUE && line25.getStatus() == Line.BLUE)
-        {
-            boxes[1][2] = 'B';
-        }
+    public Line getLine7() {
+        return line7;
+    }
 
-        //box 1,3
-        if(line15.getStatus() == Line.RED && line20.getStatus() == Line.RED && line21.getStatus() == Line.RED && line26.getStatus() == Line.RED)
-        {
-            boxes[1][3] = 'R';
-        }
-        else if(line15.getStatus() == Line.BLUE && line20.getStatus() == Line.BLUE && line21.getStatus() == Line.BLUE && line26.getStatus() == Line.BLUE)
-        {
-            boxes[1][3] = 'B';
-        }
+    public Line getLine8() {
+        return line8;
+    }
 
-        //box 1,4
-        if(line16.getStatus() == Line.RED && line21.getStatus() == Line.RED && line22.getStatus() == Line.RED && line27.getStatus() == Line.RED)
-        {
-            boxes[1][4] = 'R';
-        }
-        else if(line16.getStatus() == Line.BLUE && line21.getStatus() == Line.BLUE && line22.getStatus() == Line.BLUE && line27.getStatus() == Line.BLUE)
-        {
-            boxes[1][4] = 'B';
-        }
+    public Line getLine9() {
+        return line9;
+    }
 
-        //box 2,0
-        if(line23.getStatus() == Line.RED && line28.getStatus() == Line.RED && line29.getStatus() == Line.RED && line34.getStatus() == Line.RED)
-        {
-            boxes[2][0] = 'R';
-        }
-        else if(line23.getStatus() == Line.BLUE && line28.getStatus() == Line.BLUE && line29.getStatus() == Line.BLUE && line34.getStatus() == Line.BLUE)
-        {
-            boxes[2][0] = 'B';
-        }
+    public Line getLine10() {
+        return line10;
+    }
 
-        //box 2,1
-        if(line24.getStatus() == Line.RED && line29.getStatus() == Line.RED && line30.getStatus() == Line.RED && line35.getStatus() == Line.RED)
-        {
-            boxes[2][1] = 'R';
-        }
-        else if(line24.getStatus() == Line.BLUE && line29.getStatus() == Line.BLUE && line30.getStatus() == Line.BLUE && line35.getStatus() == Line.BLUE)
-        {
-            boxes[2][1] = 'B';
-        }
+    public Line getLine11() {
+        return line11;
+    }
 
-        //box 2,2
-        if(line25.getStatus() == Line.RED && line30.getStatus() == Line.RED && line31.getStatus() == Line.RED && line36.getStatus() == Line.RED)
-        {
-            boxes[2][2] = 'R';
-        }
-        else if(line25.getStatus() == Line.BLUE && line30.getStatus() == Line.BLUE && line31.getStatus() == Line.BLUE && line36.getStatus() == Line.BLUE)
-        {
-            boxes[2][2] = 'B';
-        }
+    public Line getLine12() {
+        return line12;
+    }
 
-        //box 2,3
-        if(line26.getStatus() == Line.RED && line31.getStatus() == Line.RED && line32.getStatus() == Line.RED && line37.getStatus() == Line.RED)
-        {
-            boxes[2][3] = 'R';
-        }
-        else if(line26.getStatus() == Line.BLUE && line31.getStatus() == Line.BLUE && line32.getStatus() == Line.BLUE && line37.getStatus() == Line.BLUE)
-        {
-            boxes[2][3] = 'B';
-        }
+    public Line getLine13() {
+        return line13;
+    }
 
-        //box 2,4
-        if(line27.getStatus() == Line.RED && line32.getStatus() == Line.RED && line33.getStatus() == Line.RED && line38.getStatus() == Line.RED)
-        {
-            boxes[2][4] = 'R';
-        }
-        else if(line27.getStatus() == Line.BLUE && line32.getStatus() == Line.BLUE && line33.getStatus() == Line.BLUE && line38.getStatus() == Line.BLUE)
-        {
-            boxes[2][4] = 'B';
-        }
+    public Line getLine14() {
+        return line14;
+    }
 
-        //box 3,0
+    public Line getLine15() {
+        return line15;
+    }
 
-        if(line34.getStatus() == Line.RED && line39.getStatus() == Line.RED && line40.getStatus() == Line.RED && line45.getStatus() == Line.RED)
-        {
-            boxes[3][0] = 'R';
-        }
-        else if(line34.getStatus() == Line.BLUE && line39.getStatus() == Line.BLUE && line40.getStatus() == Line.BLUE && line45.getStatus() == Line.BLUE)
-        {
-            boxes[3][0] = 'B';
-        }
+    public Line getLine16() {
+        return line16;
+    }
 
-        //box 3,1
+    public Line getLine17() {
+        return line17;
+    }
 
-        if(line35.getStatus() == Line.RED && line40.getStatus() == Line.RED && line41.getStatus() == Line.RED && line46.getStatus() == Line.RED)
-        {
-            boxes[3][1] = 'R';
-        }
-        else if(line35.getStatus() == Line.BLUE && line40.getStatus() == Line.BLUE && line41.getStatus() == Line.BLUE && line46.getStatus() == Line.BLUE)
-        {
-            boxes[3][1] = 'B';
-        }
+    public Line getLine18() {
+        return line18;
+    }
 
-        //box 3,2
+    public Line getLine19() {
+        return line19;
+    }
 
-        if(line36.getStatus() == Line.RED && line41.getStatus() == Line.RED && line42.getStatus() == Line.RED && line47.getStatus() == Line.RED)
-        {
-            boxes[3][2] = 'R';
-        }
-        else if(line36.getStatus() == Line.BLUE && line41.getStatus() == Line.BLUE && line42.getStatus() == Line.BLUE && line47.getStatus() == Line.BLUE)
-        {
-            boxes[3][2] = 'B';
-        }
+    public Line getLine20() {
+        return line20;
+    }
 
-        //box 3,3
+    public Line getLine21() {
+        return line21;
+    }
 
-        if(line37.getStatus() == Line.RED && line42.getStatus() == Line.RED && line43.getStatus() == Line.RED && line48.getStatus() == Line.RED)
-        {
-            boxes[3][3] = 'R';
-        }
-        else if(line37.getStatus() == Line.BLUE && line42.getStatus() == Line.BLUE && line43.getStatus() == Line.BLUE && line48.getStatus() == Line.BLUE)
-        {
-            boxes[3][3] = 'B';
-        }
+    public Line getLine22() {
+        return line22;
+    }
 
-        //box 3,4
+    public Line getLine23() {
+        return line23;
+    }
 
-        if(line38.getStatus() == Line.RED && line43.getStatus() == Line.RED && line44.getStatus() == Line.RED && line49.getStatus() == Line.RED)
-        {
-            boxes[3][4] = 'R';
-        }
-        else if(line38.getStatus() == Line.BLUE && line43.getStatus() == Line.BLUE && line44.getStatus() == Line.BLUE && line49.getStatus() == Line.BLUE)
-        {
-            boxes[3][4] = 'B';
-        }
+    public Line getLine24() {
+        return line24;
+    }
 
-        //box 4,0
-        if(line45.getStatus() == Line.RED && line50.getStatus() == Line.RED && line51.getStatus() == Line.RED && line56.getStatus() == Line.RED)
-        {
-            boxes[4][0] = 'R';
-        }
-        else if(line45.getStatus() == Line.BLUE && line50.getStatus() == Line.BLUE && line51.getStatus() == Line.BLUE && line56.getStatus() == Line.BLUE)
-        {
-            boxes[4][0] = 'B';
-        }
+    public Line getLine25() {
+        return line25;
+    }
 
-        //box 4,1
+    public Line getLine26() {
+        return line26;
+    }
 
-        if(line46.getStatus() == Line.RED && line51.getStatus() == Line.RED && line52.getStatus() == Line.RED && line57.getStatus() == Line.RED)
-        {
-            boxes[4][1] = 'R';
-        }
-        else if(line46.getStatus() == Line.BLUE && line51.getStatus() == Line.BLUE && line52.getStatus() == Line.BLUE && line57.getStatus() == Line.BLUE)
-        {
-            boxes[4][1] = 'B';
-        }
+    public Line getLine27() {
+        return line27;
+    }
 
-        //box 4,2
-        if(line47.getStatus() == Line.RED && line52.getStatus() == Line.RED && line53.getStatus() == Line.RED && line58.getStatus() == Line.RED)
-        {
-            boxes[4][2] = 'R';
-        }
-        else if(line47.getStatus() == Line.BLUE && line52.getStatus() == Line.BLUE && line53.getStatus() == Line.BLUE && line58.getStatus() == Line.BLUE)
-        {
-            boxes[4][2] = 'B';
-        }
+    public Line getLine28() {
+        return line28;
+    }
 
-        //box 4,3
-        if(line48.getStatus() == Line.RED && line53.getStatus() == Line.RED && line54.getStatus() == Line.RED && line59.getStatus() == Line.RED)
-        {
-            boxes[4][3] = 'R';
-        }
-        else if(line48.getStatus() == Line.BLUE && line53.getStatus() == Line.BLUE && line54.getStatus() == Line.BLUE && line59.getStatus() == Line.BLUE)
-        {
-            boxes[4][3] = 'B';
-        }
+    public Line getLine29() {
+        return line29;
+    }
 
-        //box 4,4
-        if(line49.getStatus() == Line.RED && line54.getStatus() == Line.RED && line55.getStatus() == Line.RED && line60.getStatus() == Line.RED)
+    public Line getLine30() {
+        return line30;
+    }
+
+    public Line getLine31() {
+        return line31;
+    }
+
+    public Line getLine32() {
+        return line32;
+    }
+
+    public Line getLine33() {
+        return line33;
+    }
+
+    public Line getLine34() {
+        return line34;
+    }
+
+    public Line getLine35() {
+        return line35;
+    }
+
+    public Line getLine36() {
+        return line36;
+    }
+
+    public Line getLine37() {
+        return line37;
+    }
+
+    public Line getLine38() {
+        return line38;
+    }
+
+    public Line getLine39() {
+        return line39;
+    }
+
+    public Line getLine40() {
+        return line40;
+    }
+
+    public Line getLine41() {
+        return line41;
+    }
+
+    public Line getLine42() {
+        return line42;
+    }
+
+    public Line getLine43() {
+        return line43;
+    }
+
+    public Line getLine44() {
+        return line44;
+    }
+
+    public Line getLine45() {
+        return line45;
+    }
+
+    public Line getLine46() {
+        return line46;
+    }
+
+    public Line getLine47() {
+        return line47;
+    }
+
+    public Line getLine48() {
+        return line48;
+    }
+
+    public Line getLine49() {
+        return line49;
+    }
+
+    public Line getLine50() {
+        return line50;
+    }
+
+    public Line getLine51() {
+        return line51;
+    }
+
+    public Line getLine52() {
+        return line52;
+    }
+
+    public Line getLine53() {
+        return line53;
+    }
+
+    public Line getLine54() {
+        return line54;
+    }
+
+    public Line getLine55() {
+        return line55;
+    }
+
+    public Line getLine56() {
+        return line56;
+    }
+
+    public Line getLine57() {
+        return line57;
+    }
+
+    public Line getLine58() {
+        return line58;
+    }
+
+    public Line getLine59() {
+        return line59;
+    }
+
+    public Line getLine60() {
+        return line60;
+    }
+
+    public void printBoard()
+    {
+        for(int i = 0; i<getBoxes().length;i++)
         {
-            boxes[4][4] = 'R';
-        }
-        else if(line49.getStatus() == Line.BLUE && line54.getStatus() == Line.BLUE && line55.getStatus() == Line.BLUE && line60.getStatus() == Line.BLUE)
-        {
-            boxes[4][4] = 'B';
+            for(int j = 0; j<getBoxes()[0].length; j++)
+            {
+                if(getBoxes()[i][j] == ' ')
+                {
+                    System.out.print("*");
+                }
+                else {
+                    System.out.print(getBoxes()[i][j]);
+                }
+            }
+            System.out.println();
         }
     }
 }
