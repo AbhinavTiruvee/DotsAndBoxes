@@ -130,8 +130,6 @@ public class DotsAndBoxesFrame extends JFrame implements MouseListener, KeyListe
         g = getGraphics(); // get the graphics context for the screen
         g.drawImage(buffer, 0, 0, null); // draw the buffer onto the screen
         g.dispose(); // dispose of the graphics context
-
-
     }
 
     public void setText(String text) {
@@ -949,12 +947,34 @@ public class DotsAndBoxesFrame extends JFrame implements MouseListener, KeyListe
                 whichLine = "line55";
             }
         }
-        try
+        if(!whichLine.equals("Invalid"))
         {
-            os.writeObject(new CommandFromClient(CommandFromClient.MOVE,whichLine+"&"+player));
-        } catch (Exception e1)
-        {
-            e1.printStackTrace();
+            //find line num from string
+            int lineNum = -1;
+            if(whichLine.length()==5)
+            {
+                 lineNum = Integer.parseInt(whichLine.substring(4));
+            }
+            else if(whichLine.length()==6)
+            {
+                 lineNum = Integer.parseInt(whichLine.substring(4));
+            }
+            for(int i = 0; i<gameData.getLines().size();i++)
+            {
+                if(lineNum == i+1)
+                {
+                    if(gameData.getLines().get(i).getStatus() == Line.GRAY)
+                    {
+                        try
+                        {
+                            os.writeObject(new CommandFromClient(CommandFromClient.MOVE,whichLine+"&"+player));
+                        } catch (Exception e1)
+                        {
+                            e1.printStackTrace();
+                        }
+                    }
+                }
+            }
         }
     }
 

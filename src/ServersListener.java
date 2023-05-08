@@ -54,6 +54,9 @@ public class ServersListener implements Runnable
                     System.out.println(data);
                     String line = data.substring(0,data.indexOf("&"));
                     char player = data.charAt(data.indexOf("&")+1);
+
+                    int beforeRedScore = gameData.score('R');
+                    int beforeBlueScore = gameData.score('B');
                     if(player == 'R')
                     {
                         if(line.equals("line1"))
@@ -542,16 +545,30 @@ public class ServersListener implements Runnable
                         }
                     }
                     gameData.setBoxes(line, player);
+                    int afterRedScore = gameData.score('R');
+                    int afterBlueScore = gameData.score('B');
+
+                    System.out.println("before, red: "+beforeRedScore+" blue: "+beforeBlueScore);
+                    System.out.println("after, red: "+afterRedScore+" blue: "+afterBlueScore);
 
                     // sends the move out to both players
                     sendCommand(new CommandFromServer(CommandFromServer.MOVE,data));
 
                     // changes the turn and checks to see if the game is over
-                    changeTurn();
+                    if(beforeBlueScore !=afterBlueScore || beforeRedScore !=afterRedScore)
+                    {
+                        //score changes
+                    }
+                    else {
+                        changeTurn();
+                    }
+
                     checkGameOver();
                 }
                 else if(cfc.getCommand() == CommandFromClient.RESTART)
                 {
+                    gameData.reset();
+                    System.out.println("Servers Listener Resets");
                     gameData.boxes = new char[5][5];
                     for(int r=0;r<gameData.boxes.length; r++)
                         for(int c=0; c<gameData.boxes[0].length; c++)
